@@ -121,7 +121,7 @@ JSONIX is pre-configured with the following `JsonSerializerOptions`:
 - **CamelCase** property naming policy
 - **Cycle ignoring** to safely handle circular references
 
-## 📝 Release Notes (v1.0.0)
+## 📝 Release Notes (v1.1.0)
 
 - Initial stable release
 - Core Key-Value, Hash, and Collection (List/Set) functionality
