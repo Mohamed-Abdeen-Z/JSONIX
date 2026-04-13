@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hashes
+namespace Public.ShowFunctions.Synchronous.CoreManagement.Hashes
 {
     public class HashesF : HashesClass, IHashesStore
     {
@@ -535,18 +535,116 @@ namespace Hashes
         public bool HEXISTS(string key, string field) => FieldExists_HashesClass(key, field);
 
         /// <summary>
-        /// Checks if a specific value exists within a field in the hash.
+        /// Checks if a specific integer value exists within a field in the hash.
         /// </summary>
         /// <param name="key">The hash key.</param>
         /// <param name="field">The field name.</param>
         /// <param name="value">The value to look for.</param>
         /// <remarks>
-        /// Key type: <b>string</b> | Field type: <b>string</b> | Value type: <b>object</b>
+        /// Key type: <b>string</b> | Field type: <b>string</b> | Value type: <b>int</b>
         /// </remarks>
         /// <returns>
         /// <b>true</b> if the value exists in the field; otherwise, <b>false</b>.
         /// </returns>
-        public bool HITEM_EXISTS(string key, string field, object value) => ItemExists_HashesClass(key, field, value);
+        public bool HITEM_EXISTS(string key, string field, int value) => ItemExists_HashesClass(key, field, value);
+
+        /// <summary>
+        /// Checks if a specific long value exists within a field in the hash.
+        /// </summary>
+        /// <param name="key">The hash key.</param>
+        /// <param name="field">The field name.</param>
+        /// <param name="value">The value to look for.</param>
+        /// <remarks>
+        /// Key type: <b>string</b> | Field type: <b>string</b> | Value type: <b>long</b>
+        /// </remarks>
+        /// <returns>
+        /// <b>true</b> if the value exists in the field; otherwise, <b>false</b>.
+        /// </returns>
+        public bool HITEM_EXISTS(string key, string field, long value) => ItemExists_HashesClass(key, field, value);
+
+        /// <summary>
+        /// Checks if a specific double value exists within a field in the hash.
+        /// </summary>
+        /// <param name="key">The hash key.</param>
+        /// <param name="field">The field name.</param>
+        /// <param name="value">The value to look for.</param>
+        /// <remarks>
+        /// Key type: <b>string</b> | Field type: <b>string</b> | Value type: <b>double</b>
+        /// </remarks>
+        /// <returns>
+        /// <b>true</b> if the value exists in the field; otherwise, <b>false</b>.
+        /// </returns>
+        public bool HITEM_EXISTS(string key, string field, double value) => ItemExists_HashesClass(key, field, value);
+
+        /// <summary>
+        /// Checks if a specific float value exists within a field in the hash.
+        /// </summary>
+        /// <param name="key">The hash key.</param>
+        /// <param name="field">The field name.</param>
+        /// <param name="value">The value to look for.</param>
+        /// <remarks>
+        /// Key type: <b>string</b> | Field type: <b>string</b> | Value type: <b>float</b>
+        /// </remarks>
+        /// <returns>
+        /// <b>true</b> if the value exists in the field; otherwise, <b>false</b>.
+        /// </returns>
+        public bool HITEM_EXISTS(string key, string field, float value) => ItemExists_HashesClass(key, field, value);
+
+        /// <summary>
+        /// Checks if a specific decimal value exists within a field in the hash.
+        /// </summary>
+        /// <param name="key">The hash key.</param>
+        /// <param name="field">The field name.</param>
+        /// <param name="value">The value to look for.</param>
+        /// <remarks>
+        /// Key type: <b>string</b> | Field type: <b>string</b> | Value type: <b>decimal</b>
+        /// </remarks>
+        /// <returns>
+        /// <b>true</b> if the value exists in the field; otherwise, <b>false</b>.
+        /// </returns>
+        public bool HITEM_EXISTS(string key, string field, decimal value) => ItemExists_HashesClass(key, field, value);
+
+        /// <summary>
+        /// Checks if a specific char value exists within a field in the hash.
+        /// </summary>
+        /// <param name="key">The hash key.</param>
+        /// <param name="field">The field name.</param>
+        /// <param name="value">The value to look for.</param>
+        /// <remarks>
+        /// Key type: <b>string</b> | Field type: <b>string</b> | Value type: <b>char</b>
+        /// </remarks>
+        /// <returns>
+        /// <b>true</b> if the value exists in the field; otherwise, <b>false</b>.
+        /// </returns>
+        public bool HITEM_EXISTS(string key, string field, char value) => ItemExists_HashesClass(key, field, value);
+
+        /// <summary>
+        /// Checks if a specific boolean value exists within a field in the hash.
+        /// </summary>
+        /// <param name="key">The hash key.</param>
+        /// <param name="field">The field name.</param>
+        /// <param name="value">The value to look for.</param>
+        /// <remarks>
+        /// Key type: <b>string</b> | Field type: <b>string</b> | Value type: <b>bool</b>
+        /// </remarks>
+        /// <returns>
+        /// <b>true</b> if the value exists in the field; otherwise, <b>false</b>.
+        /// </returns>
+        public bool HITEM_EXISTS(string key, string field, bool value) => ItemExists_HashesClass(key, field, value);
+
+        /// <summary>
+        /// Checks if a specific string value exists within a field in the hash.
+        /// </summary>
+        /// <param name="key">The hash key.</param>
+        /// <param name="field">The field name.</param>
+        /// <param name="value">The value to look for.</param>
+        /// <remarks>
+        /// Key type: <b>string</b> | Field type: <b>string</b> | Value type: <b>string</b>
+        /// </remarks>
+        /// <returns>
+        /// <b>true</b> if the value exists in the field; otherwise, <b>false</b>.
+        /// </returns>
+        public bool HITEM_EXISTS(string key, string field, string value) => ItemExists_HashesClass(key, field, value);
 
         /// <summary>
         /// Returns all hash keys present in the store.

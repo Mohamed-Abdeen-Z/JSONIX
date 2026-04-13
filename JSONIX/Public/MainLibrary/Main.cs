@@ -1,6 +1,6 @@
-﻿using Collection;
-using CoreManagement;
-using Hashes;
+﻿using Public.ShowFunctions.Synchronous.CoreManagement.Collection;
+using Public.ShowFunctions.Synchronous.CoreManagement.Hashes;
+using Public.ShowFunctions.Synchronous.CoreManagement.KeyValue;
 using Internal.Synchronous.CoreManagement.KeyValue;
 using Internal.Synchronous.Engine;
 using JSONIX.Exceptions;

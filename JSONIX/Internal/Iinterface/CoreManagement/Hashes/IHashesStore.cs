@@ -56,8 +56,15 @@ namespace Internal.Iinterface.CoreManagement.Hashes
 
         public bool EXISTS(string key);
         public bool HEXISTS(string key, string field);
-        public bool HITEM_EXISTS(string key, string field, object value);
 
+        public bool HITEM_EXISTS(string key, string field, int value);
+        public bool HITEM_EXISTS(string key, string field, long value);
+        public bool HITEM_EXISTS(string key, string field, double value);
+        public bool HITEM_EXISTS(string key, string field, float value);
+        public bool HITEM_EXISTS(string key, string field, decimal value);
+        public bool HITEM_EXISTS(string key, string field, string value);
+        public bool HITEM_EXISTS(string key, string field, char value);
+        public bool HITEM_EXISTS(string key, string field, bool value);
 
         public List<string> KEYS();
 

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Collection
+namespace Public.ShowFunctions.Synchronous.CoreManagement.Collection
 {
     public class CollectionF : CollectionClass, ICollectionStore
     {

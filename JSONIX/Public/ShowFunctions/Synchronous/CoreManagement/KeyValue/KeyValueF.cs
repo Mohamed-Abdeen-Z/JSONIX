@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoreManagement
+namespace Public.ShowFunctions.Synchronous.CoreManagement.KeyValue
 {
     public class KeyValueF : KeyValueClass, IKeyValueStore
     {
