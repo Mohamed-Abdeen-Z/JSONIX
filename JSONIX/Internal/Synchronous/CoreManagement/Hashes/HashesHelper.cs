@@ -9,6 +9,7 @@ namespace Internal.Synchronous.CoreManagement.Hashes
     {
         private bool IsHashes(object data)
         {
+            if (data is Dictionary<string, object>) return true;
             if (data is JsonElement check && check.ValueKind == JsonValueKind.Object) return true;
             return false;
         }
