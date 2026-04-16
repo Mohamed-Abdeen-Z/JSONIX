@@ -6,6 +6,7 @@ namespace Internal.Iinterface.CoreManagement.Collection
 {
     internal interface ICollectionStore
     {
+        // ====================== APPEND Operations ======================
         void APPEND(string key, int value);
         void APPEND(string key, long value);
         void APPEND(string key, double value);
@@ -23,11 +24,9 @@ namespace Internal.Iinterface.CoreManagement.Collection
         void APPEND(string key, params string[] value);
         void APPEND(string key, params char[] value);
         void APPEND(string key, params bool[] value);
-        //==================================
-        //==================================
 
+        // ====================== Delete ======================
         bool DEL(string key);
-
         bool LDEL(string key, int value);
         bool LDEL(string key, long value);
         bool LDEL(string key, double value);
@@ -46,15 +45,15 @@ namespace Internal.Iinterface.CoreManagement.Collection
         bool LDEL(string key, params char[] value);
         bool LDEL(string key, params bool[] value);
 
-        //==================================
-        //==================================
-
+        // ====================== Read Operations ======================
         List<object> FETCH(string key);
         List<string> KEYS();
         int COUNT(string key);
         int LEN(string key);
         bool EXISTS(string key);
         bool EXISTS(string key, object value);
+
+        // ====================== Rename ======================
         bool RENAME(string oldKey, string newKey);
 
     }

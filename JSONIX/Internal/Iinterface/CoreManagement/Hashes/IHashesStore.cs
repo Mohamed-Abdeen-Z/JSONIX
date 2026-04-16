@@ -6,80 +6,75 @@ namespace Internal.Iinterface.CoreManagement.Hashes
 {
     internal interface IHashesStore
     {
-        public void HSET(string key, string field, int value);
-        public void HSET(string key, string field, long value);
-        public void HSET(string key, string field, double value);
-        public void HSET(string key, string field, float value);
-        public void HSET(string key, string field, decimal value);
-        public void HSET(string key, string field, string value);
-        public void HSET(string key, string field, char value);
-        public void HSET(string key, string field, bool value);
+        // ====================== HSET Operations ======================
+        void HSET(string key, string field, int value);
+        void HSET(string key, string field, long value);
+        void HSET(string key, string field, double value);
+        void HSET(string key, string field, float value);
+        void HSET(string key, string field, decimal value);
+        void HSET(string key, string field, string value);
+        void HSET(string key, string field, char value);
+        void HSET(string key, string field, bool value);
 
-        public void HSET(string key, string field, params int[] value);
-        public void HSET(string key, string field, params long[] value);
-        public void HSET(string key, string field, params double[] value);
-        public void HSET(string key, string field, params float[] value);
-        public void HSET(string key, string field, params decimal[] value);
-        public void HSET(string key, string field, params string[] value);
-        public void HSET(string key, string field, params char[] value);
-        public void HSET(string key, string field, params bool[] value);
+        void HSET(string key, string field, params int[] value);
+        void HSET(string key, string field, params long[] value);
+        void HSET(string key, string field, params double[] value);
+        void HSET(string key, string field, params float[] value);
+        void HSET(string key, string field, params decimal[] value);
+        void HSET(string key, string field, params string[] value);
+        void HSET(string key, string field, params char[] value);
+        void HSET(string key, string field, params bool[] value);
 
-        //==================================
-        //==================================
+        // ====================== Delete ======================
+        bool DEL(string key);
+        bool DEL(string key, string field);
+        bool DEL(string key, params string[] field);
 
-        public bool DEL(string key);
+        bool HDEL(string key, string field, int value);
+        bool HDEL(string key, string field, long value);
+        bool HDEL(string key, string field, double value);
+        bool HDEL(string key, string field, float value);
+        bool HDEL(string key, string field, decimal value);
+        bool HDEL(string key, string field, string value);
+        bool HDEL(string key, string field, char value);
+        bool HDEL(string key, string field, bool value);
 
-        public bool DEL(string key, string field);
-        public bool DEL(string key, params string[] field);
+        bool HDEL(string key, string field, params int[] value);
+        bool HDEL(string key, string field, params long[] value);
+        bool HDEL(string key, string field, params double[] value);
+        bool HDEL(string key, string field, params float[] value);
+        bool HDEL(string key, string field, params decimal[] value);
+        bool HDEL(string key, string field, params string[] value);
+        bool HDEL(string key, string field, params char[] value);
+        bool HDEL(string key, string field, params bool[] value);
 
-        public bool HDEL(string key, string field, int value);
-        public bool HDEL(string key, string field, long value);
-        public bool HDEL(string key, string field, double value);
-        public bool HDEL(string key, string field, float value);
-        public bool HDEL(string key, string field, decimal value);
-        public bool HDEL(string key, string field, string value);
-        public bool HDEL(string key, string field, char value);
-        public bool HDEL(string key, string field, bool value);
+        // ====================== Read Operations ======================
+        Dictionary<string, object> GET(string key);
 
-        public bool HDEL(string key, string field, params int[] value);
-        public bool HDEL(string key, string field, params long[] value);
-        public bool HDEL(string key, string field, params double[] value);
-        public bool HDEL(string key, string field, params float[] value);
-        public bool HDEL(string key, string field, params decimal[] value);
-        public bool HDEL(string key, string field, params string[] value);
-        public bool HDEL(string key, string field, params char[] value);
-        public bool HDEL(string key, string field, params bool[] value);
+        dynamic HGET(string key, string field);
+        bool EXISTS(string key);
+        bool HEXISTS(string key, string field);
 
-        public Dictionary<string, object> GET(string key);
+        bool HITEM_EXISTS(string key, string field, int value);
+        bool HITEM_EXISTS(string key, string field, long value);
+        bool HITEM_EXISTS(string key, string field, double value);
+        bool HITEM_EXISTS(string key, string field, float value);
+        bool HITEM_EXISTS(string key, string field, decimal value);
+        bool HITEM_EXISTS(string key, string field, string value);
+        bool HITEM_EXISTS(string key, string field, char value);
+        bool HITEM_EXISTS(string key, string field, bool value);
 
-        public dynamic HGET(string key, string field);
+        List<string> KEYS();
+        int COUNT_KEYS();
 
-        public bool EXISTS(string key);
-        public bool HEXISTS(string key, string field);
+        List<string> TOTAL_FIELDS();
+        int COUNT_TOTAL_FIELDS();
 
-        public bool HITEM_EXISTS(string key, string field, int value);
-        public bool HITEM_EXISTS(string key, string field, long value);
-        public bool HITEM_EXISTS(string key, string field, double value);
-        public bool HITEM_EXISTS(string key, string field, float value);
-        public bool HITEM_EXISTS(string key, string field, decimal value);
-        public bool HITEM_EXISTS(string key, string field, string value);
-        public bool HITEM_EXISTS(string key, string field, char value);
-        public bool HITEM_EXISTS(string key, string field, bool value);
+        List<string> FIELDS(string key);
+        int COUNT_FIELDS(string key);
 
-        public List<string> KEYS();
-
-        public List<string> TOTAL_FIELDS();
-
-        public int COUNT_KEYS();
-        public int COUNT_TOTAL_FIELDS();
-
-        public List<string> FIELDS(string key);
-
-        public int COUNT_FIELDS(string key);
-
-        public bool RENAME(string oldKey, string newKey);
-
-        public bool HRENAME(string oldKey, string field, string newField);
-
+        // ====================== Rename ======================
+        bool RENAME(string oldKey, string newKey);
+        bool HRENAME(string oldKey, string field, string newField);
     }
 }

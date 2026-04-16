@@ -1,60 +1,68 @@
-﻿using System;
+﻿using Internal.Asynchronous.EngineAsync;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Internal.Synchronous.CoreManagement.KeyValue
+namespace Internal.Asynchronous.CoreManagement.KeyValueAsync
 {
-    public partial class KeyValueClass
+    public partial class KeyValueClassAsync
     {
-        public Dictionary<string, object> data;
-        public bool flag = false;
-        internal KeyValueClass(Dictionary<string, object> LoadData)
+        private ClassEngineAsync _Engine;
+        internal KeyValueClassAsync(ClassEngineAsync engine)
         {
-            data = LoadData ?? new Dictionary<string, object>();
-            flag = true;
+            _Engine = engine;
         }
 
-        protected void Insert_KeyValueClass(string key, object value)
+        protected async Task Insert_KeyValueClassAsync(string key, object value)
         {
+            var data = await _Engine.LoadAsync();
             data[key] = value;
+            await _Engine.InsertAsync(data);
         }
 
-        protected bool Delete_KeyValueClass(string key)
+        protected async Task<bool> Delete_KeyValueClassAsync(string key)
         {
+            var data = await _Engine.LoadAsync();
             if (!data.ContainsKey(key)) return false;
 
             if (!IsKeyValue(data[key])) return false;
 
             data.Remove(key);
+            await _Engine.InsertAsync(data);
             return true;
         }
 
-        protected string Read_KeyValueClass(string key)
+        protected async Task<string?> Read_KeyValueClassAsync(string key)
         {
+            var data = await _Engine.LoadAsync();
             if (!(data.ContainsKey(key) && IsKeyValue(data[key]) )) return null;
             return data[key]?.ToString();
         }
 
-        protected bool Rename_KeyValueClass(string oldKey, string newKey)
+        protected async Task<bool> Rename_KeyValueClassAsync(string oldKey, string newKey)
         {
+            var data = await _Engine.LoadAsync();
             if (!data.ContainsKey(oldKey)) return false;
             if (data.ContainsKey(newKey)) return false;
             if (!IsKeyValue(data[oldKey])) return false;
             var value = data[oldKey];
             data.Remove(oldKey);
             data[newKey] = value;
+            await _Engine.InsertAsync(data);
             return true;
         }
 
-        protected bool Exists_KeyValueClass(string key)
+        protected async Task<bool> Exists_KeyValueClassAsync(string key)
         {
+            var data = await _Engine.LoadAsync();
             if (!(data.ContainsKey(key) && IsKeyValue(data[key]) )) return false;
 
             return true;
         }
 
-        protected (List<string> Lists,int Count) Keys_KeyValueClass()
+        protected async Task<(List<string> Lists, int Count)> Keys_KeyValueClassAsync()
         {
+            var data = await _Engine.LoadAsync();
             List<string> keys = new List<string>();
             foreach (var kvp in data)
             {

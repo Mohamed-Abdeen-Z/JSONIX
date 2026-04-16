@@ -1,20 +1,22 @@
 ﻿using Internal.Iinterface.Engine;
-using JSONIX.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace JSONIX.Join
+namespace JSONIX.JoinAsync
 {
-    public class JoinToJSON : IEngine
+    public class JoinAsyncToJSON
     {
         private string _databasePath { get; }
         private JsonSerializerOptions _options { get; }
+
+        private static readonly SemaphoreSlim _fileLock = new SemaphoreSlim(1, 1);
+
         private static JsonSerializerOptions DefaultOptions()
         {
-            JsonSerializerOptions options = new JsonSerializerOptions
+            return new JsonSerializerOptions
             {
                 WriteIndented = true,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -22,43 +24,28 @@ namespace JSONIX.Join
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                 ReferenceHandler = ReferenceHandler.IgnoreCycles
             };
-            return options;
         }
 
-        public JoinToJSON(string database, JsonSerializerOptions options = null)
+        public JoinAsyncToJSON(string database, JsonSerializerOptions options = null)
         {
-            try
-            {
-                if (!File.Exists(database))
-                {
-                    File.WriteAllText(database, "{}", Encoding.UTF8);
-                }
-            }
-            catch (JsonException)
-            {
-                throw new Exception("JSONIX Error: Database file is corrupted or invalid JSON format.");
-            }
-            catch (IOException ex)
-            {
-                throw new IXActionFailedException($"Initialization failed: Cannot access storage. Details: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                throw new IXActionFailedException($"JSONIX Client Initialization Error: {ex.Message}");
-            }
             _databasePath = database;
             _options = options ?? DefaultOptions();
         }
 
-        public Dictionary<string, object> Load(string database = null)
+
+        public async Task<Dictionary<string, object>> LoadAsync(string database = null)
         {
+            string path = database ?? _databasePath;
+
             try
             {
-                if (!File.Exists(database ?? _databasePath)) return new Dictionary<string, object>();
+                if (!File.Exists(path))
+                    return new Dictionary<string, object>();
 
-                using (FileStream OpFile = new FileStream(database ?? _databasePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, true))
                 {
-                    return JsonSerializer.Deserialize<Dictionary<string, object>>(OpFile) ?? new Dictionary<string, object>();
+                    return await JsonSerializer.DeserializeAsync<Dictionary<string, object>>(fs, _options)
+                           ?? new Dictionary<string, object>();
                 }
             }
             catch (JsonException)
@@ -71,26 +58,35 @@ namespace JSONIX.Join
             }
         }
 
-        public void Insert(Dictionary<string, object> data, string database = null)
+        public async Task InsertAsync(Dictionary<string, object> data, string database = null)
         {
+            string path = database ?? _databasePath;
+
+            await _fileLock.WaitAsync();
+
             try
             {
-                using (FileStream OpFile = new FileStream(database ?? _databasePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
                 {
-                    JsonSerializer.Serialize(OpFile, data, _options);
+                    await JsonSerializer.SerializeAsync(fs, data, _options);
+                    await fs.FlushAsync();
                 }
+            }
+            catch (DirectoryNotFoundException)
+            {
+                throw new Exception($"JSONIX Error: The database file was not found at '{path}'.");
             }
             catch (JsonException)
             {
                 throw new Exception("JSONIX Error: Database file is corrupted or invalid JSON format.");
             }
-            catch (DirectoryNotFoundException)
-            {
-                throw new Exception($"JSONIX Error: The database file was not found at '{database ?? _databasePath}'.");
-            }
             catch (Exception ex)
             {
                 throw new Exception($"JSONIX Error during Insert: {ex.Message}", ex);
+            }
+            finally
+            {
+                _fileLock.Release();
             }
         }
 
