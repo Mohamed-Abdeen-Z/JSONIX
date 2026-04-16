@@ -37,7 +37,36 @@ var skillList = CLIENT.Hashes.HGET("user:1", "skills");
 CLIENT.Collection.APPEND("fruits", "apple", "banana", "orange");
 var fruits = CLIENT.Collection.FETCH("fruits");
 int count = CLIENT.Collection.LEN("fruits");
+
+// To Save the data to the JSON file
+CLIENT.Save();
 ```
+## Auto Save
+```csharp
+using JSONIX;
+
+using (JSONIX.Client CLIENT = new JSONIX.Client("JSONIX.json"))
+{
+    // Key-Value
+    CLIENT.KeyValue.SET("username", "JSONIX");
+    CLIENT.KeyValue.SET("age-y", 3);
+    string name = CLIENT.KeyValue.GET("username");
+    bool exists = CLIENT.KeyValue.EXISTS("age-y");
+
+    // Hashes
+    CLIENT.Hashes.HSET("user:1", "name", "Shadow");
+    CLIENT.Hashes.HSET("user:1", "skills", "C#", "SQL", "Redis");
+    var user = CLIENT.Hashes.GET("user:1");
+    var skillList = CLIENT.Hashes.HGET("user:1", "skills");
+
+    // Collections
+    CLIENT.Collection.APPEND("fruits", "apple", "banana", "orange");
+    var fruits = CLIENT.Collection.FETCH("fruits");
+    int count = CLIENT.Collection.LEN("fruits");
+}
+```
+
+
 ## Engine Usage
 ### Creating custom functions using the JSONIX Engine
 ```csharp
