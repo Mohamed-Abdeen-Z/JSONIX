@@ -12,6 +12,7 @@ A simple and fast in-memory data store supporting **Key-Value**, **Hashes**, and
 - Hash (Field-Value) storage
 - Collection (List/Set) storage
 - Support for multiple data types (int, long, double, float, decimal, string, bool, char)
+- Support Synchronous & Asynchronous Functions.
 - Simple and Redis-like commands
 
 # - Click here to know the latest changes
