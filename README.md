@@ -2,9 +2,6 @@
 
 JSONIX is a lightweight key-value store based on JSON.
 
-# Note
-## Before use, the examples file must be reviewed
-
 # - In-Memory Data Store
 
 A simple and fast in-memory data store supporting **Key-Value**, **Hashes**, and **Collections** (Lists/Sets).
@@ -17,6 +14,9 @@ A simple and fast in-memory data store supporting **Key-Value**, **Hashes**, and
 - Support for multiple data types (int, long, double, float, decimal, string, bool, char)
 - Support Synchronous & Asynchronous Functions.
 - Simple and Redis-like commands
+
+# - Note
+### Before use, you should review the examples and updates file
 
 # - Click here to know the latest changes
 
