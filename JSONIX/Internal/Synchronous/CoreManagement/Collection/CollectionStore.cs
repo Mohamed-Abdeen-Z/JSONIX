@@ -1,5 +1,4 @@
-﻿using Internal.Synchronous.Engine;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -8,15 +7,19 @@ namespace Internal.Synchronous.CoreManagement.Collection
 {
     public partial class CollectionClass
     {
-        private ClassEngine _Engine;
-        internal CollectionClass(ClassEngine engine)
+        internal Dictionary<string, object> data;
+        internal bool flag = false;
+        internal CollectionClass(Dictionary<string, object> dataLoad)
         {
-            _Engine = engine;
+            data = dataLoad ?? new Dictionary<string, object>();
         }
 
         protected void Insert_CollectionClass<T>(string key, T value)
         {
-            var data = _Engine.Load();
+            if (!flag)
+            {
+                flag = true;
+            }
             var dataList = (data.ContainsKey(key) && IsCollection(data[key])) ? ConvertToList(data[key]) : new List<object>();
 
             if (value is IEnumerable enumerable && value is not string)
@@ -30,24 +33,30 @@ namespace Internal.Synchronous.CoreManagement.Collection
             }
 
             data[key] = dataList;
-            _Engine.Insert(data);
+
         }
 
         protected bool Delete_CollectionClass(string key)
         {
-            var data = _Engine.Load();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!data.ContainsKey(key)) return false;
 
             if (!IsCollection(data[key])) return false;
 
             data.Remove(key);
-            _Engine.Insert(data);
+
             return true;
         }
 
         protected bool Delete_item_CollectionClass<T>(string key, T value)
         {
-            var data = _Engine.Load();
+            if (!flag)
+            {
+                flag = true;
+            }
 
             if (!(data.ContainsKey(key) && IsCollection(data[key])))
             {
@@ -79,27 +88,36 @@ namespace Internal.Synchronous.CoreManagement.Collection
                 }
             }
             data[key] = dataList;
-            _Engine.Insert(data);
+
             return Found;
         }
 
         protected List<object> Read_CollectionClass(string key)
         {
-            var data = _Engine.Load();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsCollection(data[key]))) return null;
             return ConvertToList(data[key]);
         }
 
         protected bool Exists_CollectionClass(string key)
         {
-            var data = _Engine.Load();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsCollection(data[key]))) return false;
             return true;
         }
 
         protected bool Exists_Item_CollectionClass<T>(string key, T value)
         {
-            var data = _Engine.Load();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsCollection(data[key]))) return false;
             var dataList = ConvertToList(data[key]);
             int NumRemoved = numFound(dataList, value);
@@ -112,20 +130,26 @@ namespace Internal.Synchronous.CoreManagement.Collection
 
         protected bool Rename_CollectionClass(string oldKey, string newKey)
         {
-            var data = _Engine.Load();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!data.ContainsKey(oldKey)) return false;
             if (data.ContainsKey(newKey)) return false;
             if (!IsCollection(data[oldKey])) return false;
             var value = data[oldKey];
             data.Remove(oldKey);
             data[newKey] = value;
-            _Engine.Insert(data);
+
             return true;
         }
 
         protected (List<string> Lists, int Count) Keys_CollectionClass()
         {
-            var data = _Engine.Load();
+            if (!flag)
+            {
+                flag = true;
+            }
             List<string> keys = new List<string>();
             foreach (var kvp in data)
             {
@@ -139,7 +163,10 @@ namespace Internal.Synchronous.CoreManagement.Collection
 
         protected int Len_CollectionClass(string key)
         {
-            var data = _Engine.Load();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsCollection(data[key]))) return -1;
             var dataList = ConvertToList(data[key]);
             return dataList.Count;

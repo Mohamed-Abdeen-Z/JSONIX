@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Public.ShowFunctions.Synchronous.CoreManagement.KeyValue
+namespace KeyValue
 {
     public class KeyValueF : KeyValueClass, IKeyValueStore
     {
-        internal KeyValueF(Dictionary<string, object> LoadData) : base(LoadData)
+        internal KeyValueF(Dictionary<string, object> dataLoad) : base(dataLoad)
         {
         }
         /// <summary>

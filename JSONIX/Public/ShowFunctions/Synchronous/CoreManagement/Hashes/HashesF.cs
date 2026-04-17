@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Public.ShowFunctions.Synchronous.CoreManagement.Hashes
+namespace Hashes
 {
     public class HashesF : HashesClass, IHashesStore
     {
-        internal HashesF(Dictionary<string, object> LoadData) : base(LoadData)
+        internal HashesF(Dictionary<string, object> dataLoad) : base(dataLoad)
         {
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using System.Text.Json;
 
@@ -9,6 +10,7 @@ namespace Internal.Synchronous.CoreManagement.Collection
     {
         private bool IsCollection(object data)
         {
+            if (data is List<object>) return true;
             if (data is JsonElement check && check.ValueKind == JsonValueKind.Array) return true;
             return false;
         }

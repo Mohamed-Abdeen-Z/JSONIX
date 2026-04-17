@@ -1,15 +1,14 @@
 ﻿using Internal.Iinterface.CoreManagement.Collection;
 using Internal.Synchronous.CoreManagement.Collection;
-using Internal.Synchronous.Engine;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Public.ShowFunctions.Synchronous.CoreManagement.Collection
+namespace Collection
 {
     public class CollectionF : CollectionClass, ICollectionStore
     {
-        internal CollectionF(ClassEngine engine) : base(engine)
+        internal CollectionF(Dictionary<string, object> dataLoad) : base(dataLoad)
         {
         }
 

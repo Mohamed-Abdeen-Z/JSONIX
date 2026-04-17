@@ -1,5 +1,4 @@
-﻿using Internal.Asynchronous.EngineAsync;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -9,15 +8,19 @@ namespace Internal.Asynchronous.CoreManagement.HashesAsync
 {
     public partial class HashesClassAsync
     {
-        private ClassEngineAsync _Engine;
-        internal HashesClassAsync(ClassEngineAsync engine)
+        internal Dictionary<string, object> data;
+        internal bool flag = false;
+        internal HashesClassAsync(Task<Dictionary<string, object>> dataLoad)
         {
-            _Engine = engine;
+            data = dataLoad.Result ?? new Dictionary<string, object>();
         }
 
         protected async Task Insert_HashesClassAsync<T>(string key, string field, T value)
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
 
             var dataDic = (data.ContainsKey(key) && IsHashes(data[key])) ? ConvertToDictionary(data[key]) : new Dictionary<string, object>();
 
@@ -60,24 +63,28 @@ namespace Internal.Asynchronous.CoreManagement.HashesAsync
             }
 
             data[key] = dataDic;
-            await _Engine.InsertAsync(data);
         }
 
         protected async Task<bool> Delete_HashesClassAsync(string key)
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!data.ContainsKey(key)) return false;
 
             if (!IsHashes(data[key])) return false;
 
             data.Remove(key);
-            await _Engine.InsertAsync(data);
             return true;
         }
 
         protected async Task<bool> Delete_Hashes_HashesClassAsync<T>(string key, T field)
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return false;
 
             var dataDic = ConvertToDictionary(data[key]);
@@ -102,13 +109,15 @@ namespace Internal.Asynchronous.CoreManagement.HashesAsync
             }
 
             data[key] = dataDic;
-            await _Engine.InsertAsync(data);
             return isRemoved;
         }
 
         protected async Task<bool> Delete_item_HashesClassAsync<T>(string key, string field, T value)
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return false;
 
             var dataDic = ConvertToDictionary(data[key]);
@@ -154,21 +163,26 @@ namespace Internal.Asynchronous.CoreManagement.HashesAsync
             }
 
             data[key] = dataDic;
-            await _Engine.InsertAsync(data);
 
             return Found;
         }
 
         protected async Task<Dictionary<string, object>> ReadKey_HashesClassAsync(string key)
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return null;
             return ConvertToDictionary(data[key]);
         }
 
         protected async Task<dynamic> ReadKeyField_HashesClassAsync(string key, string field)
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return null;
             var dataDic = ConvertToDictionary(data[key]);
             if (!dataDic.ContainsKey(field)) return null;
@@ -182,13 +196,19 @@ namespace Internal.Asynchronous.CoreManagement.HashesAsync
 
         protected async Task<bool> KeyExists_HashesClassAsync(string key)
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
             return data.ContainsKey(key) && IsHashes(data[key]);
         }
 
         protected async Task<bool> FieldExists_HashesClassAsync(string key, string field)
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return false;
             var dataDic = ConvertToDictionary(data[key]);
             return dataDic.ContainsKey(field);
@@ -196,7 +216,10 @@ namespace Internal.Asynchronous.CoreManagement.HashesAsync
 
         protected async Task<bool> ItemExists_HashesClassAsync(string key, string field, object value)
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return false;
             var dataDic = ConvertToDictionary(data[key]);
             if (!dataDic.ContainsKey(field)) return false;
@@ -210,7 +233,10 @@ namespace Internal.Asynchronous.CoreManagement.HashesAsync
 
         protected async Task<(List<string> keys, List<string> fields, int countKeys, int countFields)> Search_HashesClassAsync()
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
             var keys = new List<string>();
             var fields = new List<string>();
             int countKeys = 0;
@@ -234,7 +260,10 @@ namespace Internal.Asynchronous.CoreManagement.HashesAsync
 
         protected async Task<(List<string> field, int count)> SearchField_HashesClassAsync(string key)
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
             var fields = new List<string>();
             int countFields = 0;
             if (data.ContainsKey(key) && IsHashes(data[key]))
@@ -248,21 +277,26 @@ namespace Internal.Asynchronous.CoreManagement.HashesAsync
             return (fields, fields.Count);
         }
 
-        protected async Task <bool> Rename_HashesClassAsync(string oldKey, string newKey)
+        protected async Task<bool> Rename_HashesClassAsync(string oldKey, string newKey)
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!data.ContainsKey(oldKey) || data.ContainsKey(newKey)) return false;
             if (!IsHashes(data[oldKey])) return false;
             var value = data[oldKey];
             data.Remove(oldKey);
             data[newKey] = value;
-            await _Engine.InsertAsync(data);
             return true;
         }
 
         protected async Task<bool> RenameField_HashesClassAsync(string key, string oldField, string newField)
         {
-            var data = await _Engine.LoadAsync();
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return false;
             var dataDic = ConvertToDictionary(data[key]);
             if (!dataDic.ContainsKey(oldField) || dataDic.ContainsKey(newField)) return false;
@@ -270,7 +304,6 @@ namespace Internal.Asynchronous.CoreManagement.HashesAsync
             dataDic.Remove(oldField);
             dataDic[newField] = value;
             data[key] = dataDic;
-            await _Engine.InsertAsync(data);
             return true;
         }
     }

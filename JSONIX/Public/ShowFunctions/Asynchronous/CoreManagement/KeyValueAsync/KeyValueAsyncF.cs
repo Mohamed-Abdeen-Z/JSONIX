@@ -1,15 +1,14 @@
 ﻿using Internal.Iinterface.CoreManagement.KeyValueAsync;
 using Internal.Asynchronous.CoreManagement.KeyValueAsync;
-using Internal.Asynchronous.EngineAsync;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Public.ShowFunctions.Asynchronous.CoreManagement.KeyValueAsync
+namespace KeyValueAsync
 {
     public class KeyValueAsyncF : KeyValueClassAsync, IKeyValueStoreAsync
     {
-        internal KeyValueAsyncF(ClassEngineAsync engine) : base(engine)
+        internal KeyValueAsyncF(Task<Dictionary<string, object>> dataLoad) : base(dataLoad)
         {
         }
         /// <summary>

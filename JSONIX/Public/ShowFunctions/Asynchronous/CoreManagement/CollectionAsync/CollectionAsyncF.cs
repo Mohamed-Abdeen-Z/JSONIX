@@ -1,15 +1,14 @@
 ﻿using Internal.Iinterface.CoreManagement.CollectionAsync;
 using Internal.Asynchronous.CoreManagement.CollectionAsync;
-using Internal.Asynchronous.EngineAsync;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Public.ShowFunctions.Asynchronous.CoreManagement.CollectionAsync
+namespace CollectionAsync
 {
     public class CollectionAsyncF : CollectionClassAsync, ICollectionStoreAsync
     {
-        internal CollectionAsyncF(ClassEngineAsync engine) : base(engine)
+        internal CollectionAsyncF(Task<Dictionary<string, object>> dataLoad) : base(dataLoad)
         {
         }
 

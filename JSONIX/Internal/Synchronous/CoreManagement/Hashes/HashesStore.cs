@@ -2,24 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Internal.Synchronous.CoreManagement.Hashes
 {
     public partial class HashesClass
     {
-        public Dictionary<string, object> data;
-        public bool flag = false;
-
-        internal HashesClass(Dictionary<string, object> LoadData)
+        internal Dictionary<string, object> data;
+        internal bool flag = false;
+        internal HashesClass(Dictionary<string, object> dataLoad)
         {
-            data = LoadData ?? new Dictionary<string, object>();
-            flag = true;
+            data = dataLoad ?? new Dictionary<string, object>();
         }
 
         protected void Insert_HashesClass<T>(string key, string field, T value)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
 
             var dataDic = (data.ContainsKey(key) && IsHashes(data[key])) ? ConvertToDictionary(data[key]) : new Dictionary<string, object>();
 
@@ -66,6 +66,10 @@ namespace Internal.Synchronous.CoreManagement.Hashes
 
         protected bool Delete_HashesClass(string key)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!data.ContainsKey(key)) return false;
 
             if (!IsHashes(data[key])) return false;
@@ -76,6 +80,10 @@ namespace Internal.Synchronous.CoreManagement.Hashes
 
         protected bool Delete_Hashes_HashesClass<T>(string key, T field)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return false;
 
             var dataDic = ConvertToDictionary(data[key]);
@@ -105,6 +113,10 @@ namespace Internal.Synchronous.CoreManagement.Hashes
 
         protected bool Delete_item_HashesClass<T>(string key, string field, T value)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return false;
 
             var dataDic = ConvertToDictionary(data[key]);
@@ -156,12 +168,20 @@ namespace Internal.Synchronous.CoreManagement.Hashes
 
         protected Dictionary<string, object> ReadKey_HashesClass(string key)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return null;
             return ConvertToDictionary(data[key]);
         }
 
         protected dynamic ReadKeyField_HashesClass(string key, string field)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return null;
             var dataDic = ConvertToDictionary(data[key]);
             if (!dataDic.ContainsKey(field)) return null;
@@ -175,11 +195,19 @@ namespace Internal.Synchronous.CoreManagement.Hashes
 
         protected bool KeyExists_HashesClass(string key)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             return data.ContainsKey(key) && IsHashes(data[key]);
         }
 
         protected bool FieldExists_HashesClass(string key, string field)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return false;
             var dataDic = ConvertToDictionary(data[key]);
             return dataDic.ContainsKey(field);
@@ -187,6 +215,10 @@ namespace Internal.Synchronous.CoreManagement.Hashes
 
         protected bool ItemExists_HashesClass(string key, string field, object value)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return false;
             var dataDic = ConvertToDictionary(data[key]);
             if (!dataDic.ContainsKey(field)) return false;
@@ -200,6 +232,10 @@ namespace Internal.Synchronous.CoreManagement.Hashes
 
         protected (List<string> keys, List<string> fields, int countKeys, int countFields) Search_HashesClass()
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             var keys = new List<string>();
             var fields = new List<string>();
             int countKeys = 0;
@@ -223,6 +259,10 @@ namespace Internal.Synchronous.CoreManagement.Hashes
 
         protected (List<string> field, int count) SearchField_HashesClass(string key)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             var fields = new List<string>();
             int countFields = 0;
             if (data.ContainsKey(key) && IsHashes(data[key]))
@@ -238,6 +278,10 @@ namespace Internal.Synchronous.CoreManagement.Hashes
 
         protected bool Rename_HashesClass(string oldKey, string newKey)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!data.ContainsKey(oldKey) || data.ContainsKey(newKey)) return false;
             if (!IsHashes(data[oldKey])) return false;
             var value = data[oldKey];
@@ -248,6 +292,10 @@ namespace Internal.Synchronous.CoreManagement.Hashes
 
         protected bool RenameField_HashesClass(string key, string oldField, string newField)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsHashes(data[key]))) return false;
             var dataDic = ConvertToDictionary(data[key]);
             if (!dataDic.ContainsKey(oldField) || dataDic.ContainsKey(newField)) return false;

@@ -1,33 +1,21 @@
-﻿using Internal.Asynchronous.EngineAsync;
+﻿using Collection;
+using Hashes;
+using KeyValue;
 using Internal.Synchronous.Engine;
 using JSONIX.Exceptions;
-using JSONIX.Join;
-using Public.ShowFunctions.Asynchronous.CoreManagement.CollectionAsync;
-using Public.ShowFunctions.Asynchronous.CoreManagement.HashesAsync;
-using Public.ShowFunctions.Asynchronous.CoreManagement.KeyValueAsync;
-using Public.ShowFunctions.Synchronous.CoreManagement.Collection;
-using Public.ShowFunctions.Synchronous.CoreManagement.Hashes;
-using Public.ShowFunctions.Synchronous.CoreManagement.KeyValue;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
+using KeyValueAsync;
+using Internal.Asynchronous.EngineAsync;
+using CollectionAsync;
+using HashesAsync;
 
 namespace JSONIX
 {
-    public class Client
+    public partial class Client
     {
-        private readonly JoinToJSON _join;
-
-        private string _database;
-        public KeyValueF KeyValue;
-        public CollectionF Collection;
-        public HashesF Hashes;
-
-        public KeyValueAsyncF KeyValueAsync;
-        public CollectionAsyncF CollectionAsync;
-        public HashesAsyncF HashesAsync;
-
         public Client(string database, JsonSerializerOptions options = null)
         {
             try
@@ -51,35 +39,26 @@ namespace JSONIX
             }
 
             _database = database;
-            ClassEngine engine = new ClassEngine(database, options);
-            ClassEngineAsync engineAsync = new ClassEngineAsync(database, options);
 
-            _join = new JoinToJSON(database, options);
+            engine = new ClassEngine(database, options);
+            engineAsync = new ClassEngineAsync(database, options);
 
             KeyValue = new KeyValueF(engine.Load());
-            Collection = new CollectionF(engine);
+            Collection = new CollectionF(engine.Load());
             Hashes = new HashesF(engine.Load());
 
-            KeyValueAsync = new KeyValueAsyncF(engineAsync);
-            CollectionAsync = new CollectionAsyncF(engineAsync);
-            HashesAsync = new HashesAsyncF(engineAsync);
+            KeyValueAsync = new KeyValueAsyncF(engineAsync.LoadAsync());
+            CollectionAsync = new CollectionAsyncF(engineAsync.LoadAsync());
+            HashesAsync = new HashesAsyncF(engineAsync.LoadAsync());
         }
+
+
+        
 
         public override string ToString()
         {
             string message = "Location: " + "\n" + $"- {_database}" + "\n" + "Default Option: " + "\n" + "- WriteIndented = true,\n- PropertyNamingPolicy = JsonNamingPolicy.CamelCase,\n- Converters = { new JsonStringEnumConverter() },\n- DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,\n- ReferenceHandler = ReferenceHandler.IgnoreCycles";
             return message;
-        }
-
-        public void Save()
-        {
-            if (KeyValue.flag)
-                _join.Insert(KeyValue.data);
-            if (Hashes.flag)
-                _join.Insert(Hashes.data);
-
-            KeyValue.data.Clear();
-            Hashes.data.Clear();
         }
     }
 }

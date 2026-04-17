@@ -1,15 +1,14 @@
 ﻿using Internal.Iinterface.CoreManagement.HashesAsync;
 using Internal.Asynchronous.CoreManagement.HashesAsync;
-using Internal.Asynchronous.EngineAsync;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Public.ShowFunctions.Asynchronous.CoreManagement.HashesAsync
+namespace HashesAsync
 {
     public class HashesAsyncF : HashesClassAsync, IHashesStoreAsync
     {
-        internal HashesAsyncF(ClassEngineAsync engine) : base(engine)
+        internal HashesAsyncF(Task<Dictionary<string,object>> dataLoad) : base(dataLoad)
         {
         }
 

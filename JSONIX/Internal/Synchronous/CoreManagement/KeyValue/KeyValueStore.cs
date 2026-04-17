@@ -6,21 +6,28 @@ namespace Internal.Synchronous.CoreManagement.KeyValue
 {
     public partial class KeyValueClass
     {
-        public Dictionary<string, object> data;
-        public bool flag = false;
-        internal KeyValueClass(Dictionary<string, object> LoadData)
+        internal Dictionary<string, object> data;
+        internal bool flag = false;
+        internal KeyValueClass(Dictionary<string, object> dataLoad)
         {
-            data = LoadData ?? new Dictionary<string, object>();
-            flag = true;
+            data = dataLoad ?? new Dictionary<string, object>();
         }
 
         protected void Insert_KeyValueClass(string key, object value)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             data[key] = value;
         }
 
         protected bool Delete_KeyValueClass(string key)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!data.ContainsKey(key)) return false;
 
             if (!IsKeyValue(data[key])) return false;
@@ -31,12 +38,20 @@ namespace Internal.Synchronous.CoreManagement.KeyValue
 
         protected string Read_KeyValueClass(string key)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsKeyValue(data[key]) )) return null;
             return data[key]?.ToString();
         }
 
         protected bool Rename_KeyValueClass(string oldKey, string newKey)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!data.ContainsKey(oldKey)) return false;
             if (data.ContainsKey(newKey)) return false;
             if (!IsKeyValue(data[oldKey])) return false;
@@ -48,13 +63,20 @@ namespace Internal.Synchronous.CoreManagement.KeyValue
 
         protected bool Exists_KeyValueClass(string key)
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             if (!(data.ContainsKey(key) && IsKeyValue(data[key]) )) return false;
-
             return true;
         }
 
         protected (List<string> Lists,int Count) Keys_KeyValueClass()
         {
+            if (!flag)
+            {
+                flag = true;
+            }
             List<string> keys = new List<string>();
             foreach (var kvp in data)
             {
