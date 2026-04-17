@@ -83,13 +83,6 @@ JSONIX is pre-configured with the following `JsonSerializerOptions`:
 - **CamelCase** property naming policy
 - **Cycle ignoring** to safely handle circular references
 
-## 📝 Release Notes (v1.1.0)
-
-- Initial stable release
-- Core Key-Value, Hash, and Collection (List/Set) functionality
-- High-performance JSON persistence layer using JSONIX
-- Support for multiple primitive data types (`int`, `long`, `double`, `string`, `bool`, ...)
-- Implemented main commands: `SET`, `GET`, `HSET`, `APPEND`, `DEL`, `HDEL`, etc.
 
 ## 📄 License
 
