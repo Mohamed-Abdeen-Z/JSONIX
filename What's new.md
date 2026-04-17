@@ -1,3 +1,6 @@
+# - Check Examples
+- ### **[What's new](https://github.com/Mohamed-Abdeen-Z/JSONIX/blob/main/What's%20new.md)**
+
 # - The new additions in the project. (V2.0.0)
 
 - ### Performance improvement
