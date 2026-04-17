@@ -10,3 +10,10 @@
 
 
 # The additions in the project. (V1.0.0)
+- ### added:
+
+  - **SetCore**
+  
+  - **AppendCore**
+  
+  - **HSetCore**
