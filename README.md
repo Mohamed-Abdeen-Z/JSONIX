@@ -1,10 +1,12 @@
 #  - JSONIX Library (V2.0.0)
 
 JSONIX is a lightweight key-value store based on JSON.
+##
 
 # - In-Memory Data Store
 
 A simple and fast in-memory data store supporting **Key-Value**, **Hashes**, and **Collections** (Lists/Sets).
+##
 
 ## Features
 
@@ -14,16 +16,19 @@ A simple and fast in-memory data store supporting **Key-Value**, **Hashes**, and
 - Support for multiple data types (int, long, double, float, decimal, string, bool, char)
 - Support Synchronous & Asynchronous Functions.
 - Simple and Redis-like commands
-
+  
+##
 # - Note
 ### Before use, you should review the examples and updates file
+##
 
 # - Click here to know the latest changes
-
 ### **[What's new](https://github.com/Mohamed-Abdeen-Z/JSONIX/blob/main/What's%20new.md)**
+##
 
 # - Click here to know the usage method
 ### **[Usage method](https://github.com/Mohamed-Abdeen-Z/JSONIX/blob/main/Usage%20method.md)**
+##
 
 ## Commands
 
@@ -95,3 +100,6 @@ This project is open source and licensed under the **GNU AGPL-3.0 License**.
 You are free to use and modify the code, but:
 - You **cannot** sell it as a closed-source product.
 - Any modifications or derivative works must also be released as open source under the same license.
+- 
+##
+## 💬 Join us at [Free Code Inn](https://t.me/FreeCodeInn)
