@@ -1,4 +1,4 @@
-#  - JSONIX Library
+#  - JSONIX Library (V2.0.0)
 
 JSONIX is a lightweight key-value store based on JSON.
 
