@@ -39,7 +39,7 @@ var fruits = CLIENT.Collection.FETCH("fruits");
 int count = CLIENT.Collection.LEN("fruits");
 
 // To Save the data to the JSON file
-CLIENT.Save();
+CLIENT.SAVE();
 ```
 ## Auto Save
 ```csharp
