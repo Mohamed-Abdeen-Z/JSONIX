@@ -1,4 +1,5 @@
 # Manual saving
+- ### using Save || SaveAsync Function
 ## Synchronous
 ```csharp
 using JSONIX;
