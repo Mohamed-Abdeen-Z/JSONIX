@@ -20,8 +20,6 @@ A simple and fast in-memory data store supporting **Key-Value**, **Hashes**, and
 
 # - Click here to know the usage method
 ### **[Usage method](https://github.com/Mohamed-Abdeen-Z/JSONIX/blob/main/Usage%20method.md)**
-## Usage Examples
-
 
 ## Commands
 
