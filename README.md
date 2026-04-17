@@ -1,8 +1,8 @@
-#  JSONIX Library
+#  - JSONIX Library
 
 JSONIX is a lightweight key-value store based on JSON.
 
-# In-Memory Data Store
+# - In-Memory Data Store
 
 A simple and fast in-memory data store supporting **Key-Value**, **Hashes**, and **Collections** (Lists/Sets).
 
@@ -13,6 +13,10 @@ A simple and fast in-memory data store supporting **Key-Value**, **Hashes**, and
 - Collection (List/Set) storage
 - Support for multiple data types (int, long, double, float, decimal, string, bool, char)
 - Simple and Redis-like commands
+
+# - Click here to know the latest changes
+
+### **[What's new](https://github.com/Mohamed-Abdeen-Z/JSONIX/blob/main/What's%20new.md)**
 
 ## Usage Examples
 
