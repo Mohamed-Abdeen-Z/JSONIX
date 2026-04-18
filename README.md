@@ -30,6 +30,10 @@ A simple and fast in-memory data store supporting **Key-Value**, **Hashes**, and
 ### **[Usage method](https://github.com/Mohamed-Abdeen-Z/JSONIX/blob/main/Usage%20method.md)**
 ##
 
+# - Click here to know, Why Update?
+### **[Why Update?](https://github.com/Mohamed-Abdeen-Z/JSONIX/blob/main/Why%20Update%3F)**
+##
+
 ## Commands
 
 ### Key Value Commands
